@@ -1,4 +1,3 @@
-from queue import Queue # 마지막에 들어온거 뺴는 것만 가능
 from collections import deque # 무작위 접근이 어려움, 맨 앞과 맨 뒤 뺄 수 있음
 import sys
 

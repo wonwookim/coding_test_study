@@ -1,0 +1,36 @@
+import sys
+from collections import deque
+
+lines = sys.stdin.readlines()
+T = int(lines[0])
+
+for i in range(T):
+    command = lines[1 + i * 3].strip()
+    n = int(lines[1 + i * 3 + 1])
+    arr_str = lines[1 + i * 3 + 2].strip()
+
+    # 파싱 및 예외 처리
+    if arr_str == "[]":
+        nums = []
+    else:
+        nums = list(map(int, arr_str[1:-1].split(',')))
+
+    dq = deque(nums)
+    is_reversed = False #실제로 리스트를 돌리는 게 아니라, 그냥 표시만 했음
+    is_error = False
+
+    for op in command:
+        if op == 'R':
+            is_reversed = not is_reversed
+        elif op == 'D':
+            if not dq:
+                is_error = True
+                break
+            dq.pop() if is_reversed else dq.popleft()
+
+    if is_error:
+        print("error")
+    else:
+        if is_reversed:
+            dq.reverse()
+        print(f"[{','.join(map(str, dq))}]") # 출력값 정제

@@ -1,3 +1,4 @@
+# 시간: 120ms, 메모리: 38340kb
 import heapq
 import sys
 

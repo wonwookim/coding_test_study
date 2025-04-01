@@ -1,3 +1,4 @@
+# 시간: 44ms, 메모리: 33432kb
 import sys
 
 N = int(sys.stdin.readline().strip())

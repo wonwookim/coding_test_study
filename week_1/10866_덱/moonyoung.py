@@ -1,3 +1,4 @@
+# 시간: 64ms, 메모리: 34976kb
 from collections import deque
 import sys
 

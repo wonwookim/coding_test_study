@@ -1,3 +1,4 @@
+# 시간: 660ms, 메모리: 32412KB
 import sys
 input = sys.stdin.readline
 num = int(input())

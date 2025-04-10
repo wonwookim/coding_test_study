@@ -33,7 +33,7 @@ print(''.join(num_list))
 #     num_list[a+1] = key
 # print(num_list)
 
-# # Quick Sort 
+# # Quick Sort -> 일부 값을 지정하여 그 값보다 작은지 큰지 확인
 # def quick_sort(array): 
 #     if len(array) < 2: 
 #         return array
@@ -53,7 +53,7 @@ print(''.join(num_list))
 
 # print(''.join(quick_sort(num_list)))
 
-# Merge Sort
+# Merge Sort -> 반을 나눠서 진행
 # def merge_sort(array): 
 #     if len(array) < 2:
 #         return array

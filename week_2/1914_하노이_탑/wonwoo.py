@@ -12,5 +12,5 @@ def hannoi(num, start, temp, end):
     print(f'{start} {end}')
     hannoi(num-1, temp, start, end)
         
-print(2**num - 1)
+print(2**num - 1) #하노이탑 점화식
 hannoi(num, 1,2,3)

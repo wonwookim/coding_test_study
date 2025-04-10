@@ -8,42 +8,41 @@ num_list.sort(key = lambda x : int(x))
 print(''.join(num_list))
 
 # Bubble Sort
-# for j in range(len(num_list) - 1):
-#     for index in range(len(num_list) - 1 - j):
-#         if int(num_list[index]) > int(num_list[index + 1]):
+# for j in range(len(num_list) - 1): # 리스트 전체를 순환(마지막 값은 x)
+#     for index in range(len(num_list) - 1 - j): # 리스트의 값을 앞에서부터 돌면서, 비교하기
+#         if int(num_list[index]) > int(num_list[index + 1]): 앞에 값이 뒤의 값보다 큰 경우 자리 체인지
 #             num_list[index] , num_list[index + 1] = num_list[index + 1], num_list[index]
 
 
 # Select Sort
-# for index in range(len(num_list)):
-#     min_index = index
-#     for j in range(index + 1, len(num_list)):
-#         if num_list[min_index] > num_list[j]:
+# for index in range(len(num_list)): # 리스트 전체를 순환
+#     min_index = index # 순환문의 index를 기준 index로 설정 -> 뒤의 값들이 더 작은 경우 min_index를 변경
+#     for j in range(index + 1, len(num_list)): # 기준 index보다 큰 index와 비교하기
+#         if num_list[min_index] > num_list[j]: # 만약 index가 기준 index보다 크면 min_index를 변경
 #             min_index = j
-#     num_list[index], num_list[min_index] = num_list[min_index], num_list[index]
+#     num_list[index], num_list[min_index] = num_list[min_index], num_list[index] # 변경 작업
 # print(''.join(num_list))
 
 # Insert Sort
-# for index in range(1, len(num_list)):
-
-#     key = int(num_list[index])
+# for index in range(1, len(num_list)): # 밑의 값부터 확인
+#     key = int(num_list[index]) # index에 해당하는 값을 기준으로 설정
 #     a= index - 1
-#     while a >= 0 and int(num_list[a]) < key:
-#         num_list[a+1] = num_list[a]
+#     while a >= 0 and int(num_list[a]) < key: # index보다 작은 애들과 비교하여, key값이 더 크면 바꾸기
+#         num_list[a+1] = num_list[a] 
 #         a -= 1
 #     num_list[a+1] = key
 # print(num_list)
 
-# # Quick Sort
-# def quick_sort(array):
-#     if len(array) < 2:
+# # Quick Sort 
+# def quick_sort(array): 
+#     if len(array) < 2: 
 #         return array
     
 #     select = int(array[len(array) // 2]) # 임의의 기준점 (중간값으로 표현)
 #     big = []
 #     equal = []
 #     small = []
-#     for num in array:
+#     for num in array: # 설정한 기준점보다 값이 큰지 확인
 #         if int(num) > select:
 #             big.append(num)
 #         elif int(num) < select:
@@ -55,27 +54,27 @@ print(''.join(num_list))
 # print(''.join(quick_sort(num_list)))
 
 # Merge Sort
-# def merge_sort(array):
+# def merge_sort(array): 
 #     if len(array) < 2:
 #         return array
     
 #     merge_array = []
     
-#     mid = len(array) // 2
-#     big = merge_sort(array[mid:])
+#     mid = len(array) // 2 # 기준점 잡기
+#     big = merge_sort(array[mid:]) # array의 절반을 나눠서 각 두개의 array에 대해 정렬 진행행
 #     small = merge_sort(array[:mid])
     
 #     big_index = 0
 #     small_index = 0
     
-#     while big_index < len(big) and small_index < len(small) :
+#     while big_index < len(big) and small_index < len(small) : # 기준점보다 크거나 작은 array 중 한개라도 끝에 도달하면 멈춤
 #         if big[big_index] > small[small_index]:
 #             merge_array.append(big[big_index])
 #             big_index += 1
 #         else:
 #             merge_array.append(small[small_index])
 #             small_index += 1
-#     merge_array += big[big_index:]
+#     merge_array += big[big_index:] # 남은 값들을 추가하기
 #     merge_array += small[small_index:]
 #     return merge_array
 

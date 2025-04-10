@@ -11,12 +11,12 @@ input = sys.stdin.readline
 fibonacci_list = []
 num = int(input())
 
-# def fibonacci_numbers(num, i):
-#     if num < i:
+# def fibonacci_numbers(num, i): # 피보나치 함수(몇번째, 0부터 증가하는 수)
+#     if num < i: i가 num까지 갔을 경우, 정답을 보여주는 조건문
 #         return fibonacci_list[-1]
-#     fibonacci_list.append(i if i < 2 else fibonacci_list[i-2] + fibonacci_list[i-1])
+#     fibonacci_list.append(i if i < 2 else fibonacci_list[i-2] + fibonacci_list[i-1]) # 0번쨰와 1번째일 경우 그냥 그 값을 넣고, 2번째부터는 앞, 앞앞 값을 더해서 넣기
 #     i += 1
-#     return fibonacci_numbers(num, i)
+#     return fibonacci_numbers(num, i) # 반복
 
 # print(fibonacci_numbers(num, 0))
 

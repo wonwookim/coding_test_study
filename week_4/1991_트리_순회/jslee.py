@@ -1,25 +1,37 @@
-import sys
-
 N = int(input())
-M = int(input())
+tree = dict()
 
-visited = [False] * (N+1) # 1번부터 시작하니 전부 N+1
-graph = [[] for _ in range(N+1)]
-for _ in range(M):
-    a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+for _ in range(N):
+    root, left, right = input().split()
+    tree[root] = [left, right]
 
+def preorder(tree, node):
+    if node == '.':      # 자식 루트 없는 것 판별
+        return
+    left, right = tree[node]        # ← 언패킹. left와 right를 분배함
+    print(node, end='')
+    preorder(tree, left)
+    preorder(tree, right)
 
-def dfs(graph, v, visited):
-    visited[v] = True
-    for next in graph[v]:
-        if not visited[next]:
-            dfs(graph, next, visited)
+def inorder(tree, node):
+    if node == '.':      
+        return
+    left, right = tree[node]        
+    inorder(tree, left)
+    print(node, end='')
+    inorder(tree, right)
 
+def postorder(tree, node):
+    if node == '.':   
+        return
+    left, right = tree[node]       
+    postorder(tree, left)
+    postorder(tree, right)
+    print(node, end='')
+    
 
-dfs(graph, 1, visited)
-
-total_infected_computer = sum(visited) - 1 #1번 제외
-print(total_infected_computer)
-
+preorder(tree, 'A')
+print()
+inorder(tree, 'A')
+print()
+postorder(tree, 'A')

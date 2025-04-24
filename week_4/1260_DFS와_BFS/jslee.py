@@ -1,38 +1,42 @@
+import sys
+from collections import deque
 
-N = int(input())
-tree = dict()
+N, M, V = map(int, input().split())
+visited_dfs = [False] * (N+1) 
+graph = [[] for _ in range(N+1)]
+for _ in range(M):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-for _ in range(N):
-    root, left, right = input().split()
-    tree[root] = [left, right]
 
-def preorder(tree, node):
-    if node == '.':      # 자식 루트 없는 것 판별
-        return
-    left, right = tree[node]        # ← 언패킹. left와 right를 분배함
-    print(node, end='')
-    preorder(tree, left)
-    preorder(tree, right)
+def dfs(graph, start, visited):
+    for neighbors in graph:
+        neighbors.sort()
+    visited_dfs[start] = True
+    print(start, end=' ')
+    for next in graph[start]:
+        if not visited_dfs[next]:
+            dfs(graph, next, visited)
 
-def inorder(tree, node):
-    if node == '.':      
-        return
-    left, right = tree[node]        
-    inorder(tree, left)
-    print(node, end='')
-    inorder(tree, right)
+def bfs(graph, start):
+    for neighbors in graph:
+        neighbors.sort()
+    visited_bfs = [False] * (N+1)
+    queue = deque([start])
+    visited_bfs[start] = True
 
-def postorder(tree, node):
-    if node == '.':   
-        return
-    left, right = tree[node]       
-    postorder(tree, left)
-    postorder(tree, right)
-    print(node, end='')
-    
+    while queue:
+        node = queue.popleft()
+        print(node, end=' ')
+        for next in graph[node]:
+            if not visited_bfs[next]:
+                queue.append(next)
+                visited_bfs[next] = True
 
-preorder(tree, 'A')
+
+
+
+dfs(graph, V, visited_dfs)
 print()
-inorder(tree, 'A')
-print()
-postorder(tree, 'A')
+bfs(graph, V)

@@ -73,7 +73,8 @@ def insert_to_record_table(readme_lines, new_row):
             break
     else:
         table_end = len(readme_lines)
-    return readme_lines[:table_end] + [new_row] + readme_lines[table_end:]
+    return readme_lines[:table_end] + [new_row + "\n"] + readme_lines[table_end:]
+
 
 def extract_current_week_block(readme_lines):
     start = end = None

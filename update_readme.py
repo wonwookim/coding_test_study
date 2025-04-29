@@ -6,8 +6,8 @@ README_PATH = Path("README.md")
 SOLVEDAC_API = "https://solved.ac/api/v3/search/problem"
 HEADERS = {"x-solvedac-language": "ko"}
 
-problem_titles = ['하노이 탑', '수 정렬하기', '피보나치 수 5']
-tech_type = "재귀함수와 정렬"
+problem_titles = ['종이의 개수', '색종이 만들기', '쿼드트리', '욕심쟁이 판다', '게임', '할 일 정하기 1']
+tech_type = "분할정복, DP 심화"
 WORKBOOK_URL = "https://www.acmicpc.net/workbook/view/12345"
 
 def get_problem_info(title):

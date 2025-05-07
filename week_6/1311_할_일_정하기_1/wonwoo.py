@@ -1,3 +1,4 @@
+# 시간: 4968ms, 메모리: 230120KB
 # 점화식 : 
     # dp[person][mask] = min(dp[person][mask], [person-1][prev_mask] + cost[person][j]) -> 기존에 mask를 사용하지 않고 풀었을 경우 x 
 
@@ -18,7 +19,7 @@ def dfs(person, mask):
     if dp[person][mask] != -1:
         return dp[person][mask] # -1이 아니면 이미 배정 된 경우
 
-    min_cost = float('inf')
+    min_cost = 1e9
     for job in range(N): # 맨 처음일 경우 첫번째 사람에게 3가지의 일을 배정하는 모든 경우의 수 확인
         if not (mask & (1 << job)):  # 아직 배정되지 않은 일, job이 0일 경우 (1 << job)은 001, 1일 경우 010
             # mask와 그 값이 동시에 1이라면 해당 일은 배정 받은 경우로 pass

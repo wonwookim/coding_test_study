@@ -1,6 +1,6 @@
 # 시간: 4968ms, 메모리: 230120KB
 # 점화식 : 
-    # dp[person][mask] = min(dp[person][mask], [person-1][prev_mask] + cost[person][j]) -> 기존에 mask를 사용하지 않고 풀었을 경우 x 
+    # dp[person][mask] = min(dp[person][mask], dp[person-1][prev_mask] + cost[person][j]) -> 기존에 mask를 사용하지 않고 풀었을 경우 x 
 
 # 비트마스킹을 이용하는 이유 -> 메모리 및 시간 단축
 # 비트마스킹 문제 쉬운 것 좀 풀어봐야 할 것 같음

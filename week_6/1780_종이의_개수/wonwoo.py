@@ -39,7 +39,8 @@ def cut_paper(array):
 
 cut_paper(array)
 
-# for i in answer.values(): 이렇게 했을 때, 계속 틀렸다고 했음 -> dict에서 무슨 순서를 보장 못 하나봄
-#   print(i) 
-for i in [-1, 0, 1]:
-    print(answer[i])
+
+for i in answer: # 이렇게 했을 때, 계속 틀렸다고 했음 -> dict에서 무슨 순서를 보장 못 하나봄
+  print(answer[i]) 
+# for i in [-1, 0, 1]:
+#     print(answer[i])

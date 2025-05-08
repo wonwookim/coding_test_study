@@ -6,9 +6,9 @@ README_PATH = Path("README.md")
 SOLVEDAC_API = "https://solved.ac/api/v3/search/problem"
 HEADERS = {"x-solvedac-language": "ko"}
 
-problem_titles = ['종이의 개수', '색종이 만들기', '쿼드트리', '욕심쟁이 판다', '게임', '할 일 정하기 1']
-tech_type = "분할정복, DP 심화"
-WORKBOOK_URL = "https://www.acmicpc.net/workbook/view/12345"
+problem_titles = ['예산', '공유기 설치', '주식', '병든 나이트']
+tech_type = "이분탐색, 그리디 알고리즘"
+WORKBOOK_URL = ""
 
 def get_problem_info(title):
     params = {"query": title, "sort": "id", "direction": "asc"}

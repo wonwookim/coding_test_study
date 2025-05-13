@@ -6,8 +6,8 @@ README_PATH = Path("README.md")
 SOLVEDAC_API = "https://solved.ac/api/v3/search/problem"
 HEADERS = {"x-solvedac-language": "ko"}
 
-problem_titles = ['예산', '공유기 설치', '주식', '병든 나이트']
-tech_type = "이분탐색, 그리디 알고리즘"
+problem_titles = ['후보 추천하기', '뱀', '감시', '부분수열의 합', 'N-Queen', '도영이가 만든 맛있는 음식', '집합']
+tech_type = "시뮬레이션, 백트레킹, 비트마스킹"
 WORKBOOK_URL = ""
 
 def get_problem_info(title):

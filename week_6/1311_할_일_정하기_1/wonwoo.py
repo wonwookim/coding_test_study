@@ -26,7 +26,7 @@ def dfs(person, mask):
             new_mask = mask | (1 << job) # mask가 000, job이 0인 경우 -> new_mask = 001 -> 1번 일을 배정 받은 것 
             total_cost = array[person][job] + dfs(person + 1, new_mask) # 점화식을 이용(mask를 초기화)
             min_cost = min(min_cost, total_cost) # 첫번째 사람에게 각각의 일을 배정 받았을 때, 최소 값을 확인
-
+ 
     dp[person][mask] = min_cost # 최종 최솟값을 해당 person에게 지정하기기
     return min_cost
 

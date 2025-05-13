@@ -22,5 +22,4 @@ for _ in range(T):
             profit = max_price - today_price
             total_profit += profit
 
-    # 이 테스트케이스에서의 총 이익 출력
     print(total_profit)

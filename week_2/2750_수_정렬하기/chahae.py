@@ -25,7 +25,6 @@ def bubble_sort(num_list):
     for i in range(N):
         print(num_list[i])
 
-
 # 선택정렬(맨앞 요소부터 시작 최소값을 찾아서 교환)
 # 32412	100
 def selection_sort(num_list):
@@ -83,13 +82,67 @@ quick_sort(num_list, 0, N-1)
 for i in num_list:
     print(i)
 
-# 병합정렬
+# 병합정렬 32412	36
+# https://wjunsea.tistory.com/132
+# https://discord.com/channels/@me/1349987762803179550
 def merge_sort(num_list):
-    pass
+    # 배열의 길이가 1 이하면 이미 정렬되었다 가정
+    if 1 >= len(num_list):
+        return num_list
+
+    # 중간값을 정해 배열을 둘로 나누기
+    mid =  len(num_list) // 2
+    left_list = num_list[:mid]
+    right_list = num_list[mid:]
+
+    # 왼쪽 부분, 오른쪽 부분 재귀적으로 배열 정렬
+    left_list = merge_sort(left_list)
+    right_list = merge_sort(right_list)
+
+    # 병합리스트 & idx 설정
+    merge_list = []
+    left_idx, right_idx = 0, 0
+
+    # 두 배열을 비교해서 새로운 리스트에 정렬하기
+    while left_idx < len(left_list) and right_idx < len(right_list):
+        if left_list[left_idx] <= right_list[right_idx]:
+            merge_list.append(left_list[left_idx])
+            left_idx += 1
+
+        else :
+            merge_list.append(right_list[right_idx])
+            right_idx += 1
+
+    # 남은 요소 리스트에 담기
+    merge_list.extend(left_list[left_idx:])
+    merge_list.extend(right_list[right_idx:])
+
+    return merge_list
+
+merge_list = merge_sort(num_list)
+for i in merge_list:
+    print(i)
 
 # 계수정렬
+# https://www.cs.miami.edu/home/burt/learning/Csc517.091/workbook/countingsort.html
+# 계수를 이용하여 정렬
+max_val = max(num_list) + 1
+count_list = [0] * max_val
 def counting_sort(num_list):
-    pass
+    for n in num_list:
+        count_list[n] += 1
+
+    sorted_list = []
+    for i, cnt enumerate(count_list):
+        sorted_list.extend([i] * cnt)
+
+    return sorted_list
+
+sorted_list = counting_sort(num_list)
+for n in sorted_list:
+    print(n)
+
+
 
 # 기수정렬
 def radix_sort(num_list):

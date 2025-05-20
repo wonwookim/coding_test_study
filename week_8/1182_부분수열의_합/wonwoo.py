@@ -13,17 +13,16 @@ input = sys.stdin.readline
 N, S = map(int, input().split())
 arr = list(map(int, input().split()))
 result = 0
-visited = [False] * (N + 1)
+visited = [False] * (N + 1) # for 구문에서 idx + 1을 해주기 때문에 사용 x
 
 def backtracking(idx, total):
     global result
     if total == S and idx != -1:
-        # print(a)
+
         result += 1
     if idx == N:
         return
-    # print(f'추가된 배열열{a}')
-    # print(idx)
+    
     for i in range(idx + 1, N):
         if not visited[i]:
             visited[i] = True

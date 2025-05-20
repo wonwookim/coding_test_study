@@ -2,34 +2,39 @@ import requests
 import re
 from pathlib import Path
 
+# 기본 설정
 README_PATH = Path("README.md")
-SOLVEDAC_API = "https://solved.ac/api/v3/search/problem"
 HEADERS = {"x-solvedac-language": "ko"}
+SOLVEDAC_API_SHOW = "https://solved.ac/api/v3/problem/show"
 
-problem_titles = ['후보 추천하기', '뱀', '감시', '부분수열의 합', 'N-Queen', '도영이가 만든 맛있는 음식', '집합']
+# 📌 사용자 설정
+problem_ids = [1713, 3190, 15683, 1182, 9663, 2961, 11723]  # 사용할 문제 번호 리스트
 tech_type = "시뮬레이션, 백트레킹, 비트마스킹"
-WORKBOOK_URL = ""
+WORKBOOK_URL = ""  # 백준 문제집 링크 입력 (필요시)
 
-def get_problem_info(title):
-    params = {"query": title, "sort": "id", "direction": "asc"}
-    response = requests.get(SOLVEDAC_API, headers=HEADERS, params=params)
+# 문제 번호 기반 정보 조회
+def get_problem_info_by_id(problem_id):
+    url = f"{SOLVEDAC_API_SHOW}?problemId={problem_id}"
+    response = requests.get(url, headers=HEADERS)
     data = response.json()
-    item = data['items'][0]
     return {
-        "title": item["titleKo"],
-        "problemId": item["problemId"],
-        "level": item["level"]
+        "title": data["titleKo"],
+        "problemId": data["problemId"],
+        "level": data["level"]
     }
 
+# README에서 다음 주차 번호 추출
 def get_next_week_number(readme_lines):
     weeks = [int(m.group(1)) for line in readme_lines if (m := re.search(r"Week (\d+)", line))]
     return max(weeks) + 1 if weeks else 1
 
+# GitHub 링크 생성
 def make_github_link(problemId, title, week):
     folder_name = f"{problemId}_{title.replace(' ', '_')}"
     encoded_folder = requests.utils.quote(folder_name)
     return f"https://github.com/wonwookim/coding_test_study/tree/main/week_{week}/{encoded_folder}"
 
+# 문제 폴더 및 README.md 생성
 def create_problem_folders(problem_data, week, base_path):
     created = []
     for p in problem_data:
@@ -42,6 +47,7 @@ def create_problem_folders(problem_data, week, base_path):
         created.append(str(full_path))
     return created
 
+# 현재 주차 블록 요약 → 한 줄 요약 테이블
 def merge_block_to_summary(block_lines):
     titles, levels = [], []
     week = None
@@ -59,6 +65,7 @@ def merge_block_to_summary(block_lines):
     merged = f"| Week {week} | {tech_type} | {'<br>'.join(titles)} | {'<br>'.join(levels)} | {'<br>'.join(['✅']*len(titles))} | [바로가기](https://github.com/wonwookim/coding_test_study/tree/main/week_{week}) |\n"
     return merged
 
+# 기록 테이블에 한 줄 추가
 def insert_to_record_table(readme_lines, new_row):
     start_idx, end_idx = None, None
     for i, line in enumerate(readme_lines):
@@ -75,7 +82,7 @@ def insert_to_record_table(readme_lines, new_row):
         table_end = len(readme_lines)
     return readme_lines[:table_end] + [new_row + "\n"] + readme_lines[table_end:]
 
-
+# 📌 이번 주 문제 영역 추출
 def extract_current_week_block(readme_lines):
     start = end = None
     for i, line in enumerate(readme_lines):
@@ -88,6 +95,7 @@ def extract_current_week_block(readme_lines):
         end = len(readme_lines)
     return start, end, readme_lines[start+3:end]  # skip title, 문제집, header
 
+# Markdown 테이블 생성
 def make_markdown_table(problem_data, week):
     table = [
         "| 주차  | 기술 유형     | 문제명  | 난이도 | 풀이<br>여부 | 풀이<br>링크 |",
@@ -103,26 +111,26 @@ def make_markdown_table(problem_data, week):
         table.append(row)
     return [line + "\n" for line in table]
 
-
+# 메인 실행 함수
 def main():
     readme_lines = README_PATH.read_text(encoding="utf-8").splitlines(keepends=True)
     week = get_next_week_number(readme_lines)
-    problems = [get_problem_info(title) for title in problem_titles]
+    problems = [get_problem_info_by_id(pid) for pid in problem_ids]
     folders = create_problem_folders(problems, week, ".")
 
-    # 백업용 현재 문제 블록 추출 → 기록용 한 줄 요약
+    # 현재 블록을 기록 테이블에 요약 추가
     start, end, current_block = extract_current_week_block(readme_lines)
     summary_line = merge_block_to_summary(current_block)
     if summary_line:
         readme_lines = insert_to_record_table(readme_lines, summary_line)
 
-    # 이번 주 문제 영역에 새 주차 테이블 삽입
-        # replace 문제집 링크
+    # 문제집 링크 업데이트
     for i, line in enumerate(readme_lines):
         if "🔗 **이번 주 문제집:**" in line:
             readme_lines[i] = f"🔗 **이번 주 문제집:** [백준 문제집]({WORKBOOK_URL})\n"
             break
 
+    # 새로운 주차 테이블 삽입
     new_table = make_markdown_table(problems, week)
     updated_lines = readme_lines[:start+3] + new_table + ["\n"] + readme_lines[end:]
     README_PATH.write_text("".join(updated_lines), encoding="utf-8")

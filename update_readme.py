@@ -8,7 +8,7 @@ HEADERS = {"x-solvedac-language": "ko"}
 SOLVEDAC_API_SHOW = "https://solved.ac/api/v3/problem/show"
 
 # 📌 사용자 설정
-problem_ids = [11726, 1012, 2805, 11724, 18870, 1697, 14940]  # 사용할 문제 번호 리스트
+problem_ids = [1074, 1931, 7576]  # 사용할 문제 번호 리스트
 tech_type = "solved.ac stage_3"
 WORKBOOK_URL = ""  # 백준 문제집 링크 입력 (필요시)
 

@@ -11,7 +11,7 @@ input = sys.stdin.readline
 N = int(input())
 
 flavors = [list(map(int,input().split())) for _ in range(N)]
-visited = [False] * (N + 1)
+# visited = [False] * (N + 1)
 result = 1e9
 
 def backtracking(idx, sour, bitter):
@@ -21,10 +21,10 @@ def backtracking(idx, sour, bitter):
     if idx == N:
         return 
     for i in range(idx + 1, N):
-        if not visited[i]: # 방문하지 않았을 때,
-            visited[i] = True
+        # if not visited[i]: # 방문하지 않았을 때,
+            # visited[i] = True
             backtracking(i, sour * flavors[i][0], bitter + flavors[i][1])
-            visited[i] = False
+            # visited[i] = False
     
 backtracking(-1, 1, 0)
 print(result)

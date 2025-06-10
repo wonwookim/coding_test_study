@@ -8,8 +8,8 @@ HEADERS = {"x-solvedac-language": "ko"}
 SOLVEDAC_API_SHOW = "https://solved.ac/api/v3/problem/show"
 
 # 📌 사용자 설정
-problem_ids = [1713, 3190, 15683, 1182, 9663, 2961, 11723]  # 사용할 문제 번호 리스트
-tech_type = "시뮬레이션, 백트레킹, 비트마스킹"
+problem_ids = [11726, 1012, 2805, 11724, 18870, 1697, 14940]  # 사용할 문제 번호 리스트
+tech_type = "solved.ac stage_3"
 WORKBOOK_URL = ""  # 백준 문제집 링크 입력 (필요시)
 
 # 문제 번호 기반 정보 조회

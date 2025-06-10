@@ -133,7 +133,7 @@ def counting_sort(num_list):
         count_list[n] += 1
 
     sorted_list = []
-    for i, cnt enumerate(count_list):
+    for i, cnt in enumerate(count_list):
         sorted_list.extend([i] * cnt)
 
     return sorted_list

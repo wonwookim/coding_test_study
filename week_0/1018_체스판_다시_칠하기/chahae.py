@@ -1,4 +1,5 @@
 # 체스판칠하기
+# 32412	64
 
 import sys
 input = sys.stdin.readline
